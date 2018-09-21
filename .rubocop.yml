@@ -1,0 +1,5 @@
+Documentation:
+  Enabled: false
+Metrics:
+  LineLenght:
+    Max: 99
