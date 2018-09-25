@@ -1,8 +1,9 @@
 require 'rails_helper'
+require 'faker'
 
 describe Rent do
-  let(:user_id) { User.first.id }
-  let(:book_id) { Book.first.id }
+  let(:user_id) { create(:user).id }
+  let(:book_id) { create(:book).id }
   let(:from_date) { Faker::Date.forward(1) }
   let(:to_date) { Faker::Date.forward(100) }
 
@@ -19,7 +20,25 @@ describe Rent do
     end
   end
 
-  context 'without all fields' do
+  context 'without from date' do
+    subject(:rent) do
+      described_class.new(user_id: user_id,
+                          book_id: book_id,
+                          from_date: '',
+                          to_date: to_date)
+    end
+
+    it 'is not valid' do
+      expect(subject.valid?).to eq(false)
+    end
+
+    it 'has from date error' do
+      subject.valid?
+      expect(subject.errors[:from_date].count).to be > 0
+    end
+  end
+
+  context 'without from field date' do
     subject(:rent) do
       described_class.new(user_id: user_id,
                           book_id: book_id,
@@ -31,9 +50,9 @@ describe Rent do
       expect(subject.valid?).to eq(false)
     end
 
-    it 'contains publisher field error' do
+    it 'has to date field erros' do
       subject.valid?
-      expect(subject.errors[:to_date].length).to be > 0
+      expect(subject.errors[:to_date].count).to be > 0
     end
   end
 end
