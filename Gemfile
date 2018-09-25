@@ -59,3 +59,4 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'devise', '~> 4.5'
 gem 'devise_token_auth', '~> 1.0.0.rc2'
 gem 'rubocop', '~> 0.59.1'
+gem 'wor-paginate', '~> 0.1.4'
