@@ -2,10 +2,12 @@ require 'faker'
 require 'rails_helper'
 
 describe User do
+  subject(:user) do
+    user
+  end
+
   context 'with all fields' do
-    subject(:user) do
-      build(:user)
-    end
+    let(:user) { build(:user) }
 
     it 'is valid' do
       expect(subject.valid?).to eq(true)
@@ -13,9 +15,7 @@ describe User do
   end
 
   context 'without first name' do
-    subject(:user) do
-      build(:user_without_firstname)
-    end
+    let(:user) { build(:user, first_name: '') }
 
     it 'is not valid' do
       expect(subject.valid?).to eq(false)
@@ -28,9 +28,7 @@ describe User do
   end
 
   context 'without last name' do
-    subject(:book) do
-      build(:user_without_lastname)
-    end
+    let(:user) { build(:user, last_name: '') }
 
     it 'is not valid' do
       expect(subject.valid?).to eq(false)
