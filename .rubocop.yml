@@ -3,3 +3,6 @@ Documentation:
 Metrics:
   LineLenght:
     Max: 99
+  BlockLength:
+    Exclude:
+      - ‘spec/**/*.rb’

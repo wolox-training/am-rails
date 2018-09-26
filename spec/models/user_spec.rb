@@ -3,40 +3,22 @@ require 'rails_helper'
 
 describe User do
   subject(:user) do
-    user
+    build(:user)
   end
 
-  context 'with all fields' do
-    let(:user) { build(:user) }
-
-    it 'is valid' do
-      expect(subject.valid?).to eq(true)
-    end
+  it 'is valid with all fields' do
+    is_expected.to be_valid
   end
 
-  context 'without first name' do
-    let(:user) { build(:user, first_name: '') }
-
-    it 'is not valid' do
-      expect(subject.valid?).to eq(false)
-    end
-
-    it 'contains first name field error' do
-      subject.valid?
-      expect(subject.errors[:first_name].length).to be > 0
-    end
+  it 'is not valid without a first_name' do
+    subject.first_name = ''
+    is_expected.to_not be_valid
+    expect(subject.errors[:first_name].count).to be > 0
   end
 
-  context 'without last name' do
-    let(:user) { build(:user, last_name: '') }
-
-    it 'is not valid' do
-      expect(subject.valid?).to eq(false)
-    end
-
-    it 'contains last name field error' do
-      subject.valid?
-      expect(subject.errors[:last_name].length).to be > 0
-    end
+  it 'is not valid without a last_name' do
+    subject.last_name = ''
+    is_expected.to_not be_valid
+    expect(subject.errors[:last_name].count).to be > 0
   end
 end

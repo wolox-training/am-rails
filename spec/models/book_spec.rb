@@ -3,92 +3,46 @@ require 'rails_helper'
 
 describe Book do
   subject(:book) do
-    book
+    build(:book)
   end
 
-  context 'with all fields' do
-    let(:book) { build(:book) }
-
-    it 'is valid' do
-      expect(subject.valid?).to eq(true)
-    end
+  it 'is valid with all atributes' do
+    is_expected.to be_valid
   end
 
-  context 'without publisher' do
-    let(:book) { build(:book, publisher: '')}
-
-    it 'is not valid' do
-      expect(subject.valid?).to eq(false)
-    end
-
-    it 'contains publisher field error' do
-      subject.valid?
-      expect(subject.errors[:publisher].count).to be > 0
-    end
+  it 'is not valid without a publisher' do
+    subject.publisher = ''
+    is_expected.to_not be_valid
+    expect(subject.errors[:publisher].count).to be > 0
   end
 
-  context 'without genre' do
-    let(:book) { build(:book, genre: '') }
-
-    it 'is not valid' do
-      expect(subject.valid?).to eq(false)
-    end
-
-    it 'contains genre field error' do
-      subject.valid?
-      expect(subject.errors[:genre].count).to be > 0
-    end
+  it 'is not valid without a genre' do
+    subject.genre = ''
+    is_expected.to_not be_valid
+    expect(subject.errors[:genre].count).to be > 0
   end
 
-  context 'without author' do
-    let(:book) { build(:book, author: '') }
-
-    it 'is not valid' do
-      expect(subject.valid?).to eq(false)
-    end
-
-    it 'contains author field error' do
-      subject.valid?
-      expect(subject.errors[:author].count).to be > 0
-    end
+  it 'is not valid without an author' do
+    subject.author = ''
+    is_expected.to_not be_valid
+    expect(subject.errors[:author].count).to be > 0
   end
 
-  context 'without image' do
-    let(:book) { build(:book, image: '') }
-
-    it 'is not valid' do
-      expect(subject.valid?).to eq(false)
-    end
-
-    it 'contains image field error' do
-      subject.valid?
-      expect(subject.errors[:image].count).to be > 0
-    end
+  it 'is not valid without an image' do
+    subject.image = ''
+    is_expected.to_not be_valid
+    expect(subject.errors[:image].count).to be > 0
   end
 
-  context 'without title' do
-    let(:book) { build(:book, title: '') }
-
-    it 'is not valid' do
-      expect(subject.valid?).to eq(false)
-    end
-
-    it 'contains title field error' do
-      subject.valid?
-      expect(subject.errors[:title].count).to be > 0
-    end
+  it 'is not valid without a title' do
+    subject.title = ''
+    is_expected.to_not be_valid
+    expect(subject.errors[:title].count).to be > 0
   end
 
-  context 'without year' do
-    let(:book) { build(:book, year: '') }
-
-    it 'is not valid' do
-      expect(subject.valid?).to eq(false)
-    end
-
-    it 'contains year field error' do
-      subject.valid?
-      expect(subject.errors[:year].count).to be > 0
-    end
+  it 'is not valid without a year' do
+    subject.year = ''
+    is_expected.to_not be_valid
+    expect(subject.errors[:year].count).to be > 0
   end
 end
