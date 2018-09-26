@@ -3,4 +3,6 @@ class User < ApplicationRecord
   include DeviseTokenAuth::Concerns::User
 
   validates :first_name, :last_name, presence: true
+  has_many :rents
+  has_many :books, through: :rents
 end
