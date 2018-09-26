@@ -2,18 +2,9 @@ require 'faker'
 require 'rails_helper'
 
 describe User do
-  let(:email) { Faker::Internet.email }
-  let(:password) { 'password' }
-  let(:first_name) { Faker::Name.first_name }
-  let(:last_name) { Faker::Name.last_name }
-
   context 'with all fields' do
     subject(:user) do
-      described_class.new(email: email,
-                          password: password,
-                          password_confirmation: password,
-                          first_name: first_name,
-                          last_name: last_name)
+      build(:user)
     end
 
     it 'is valid' do
@@ -22,12 +13,8 @@ describe User do
   end
 
   context 'without first name' do
-    subject(:book) do
-      described_class.new(email: email,
-                          password: password,
-                          password_confirmation: password,
-                          first_name: '',
-                          last_name: last_name)
+    subject(:user) do
+      build(:user_without_firstname)
     end
 
     it 'is not valid' do
@@ -42,11 +29,7 @@ describe User do
 
   context 'without last name' do
     subject(:book) do
-      described_class.new(email: email,
-                          password: password,
-                          password_confirmation: password,
-                          first_name: first_name,
-                          last_name: '')
+      build(:user_without_lastname)
     end
 
     it 'is not valid' do
