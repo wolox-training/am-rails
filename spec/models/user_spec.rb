@@ -1,24 +1,29 @@
-require 'faker'
 require 'rails_helper'
 
 describe User do
   subject(:user) do
-    build(:user)
+    user
   end
 
-  it 'is valid with all fields' do
-    is_expected.to be_valid
+  context 'with all field' do
+    let(:user) { build(:user) }
+
+    it 'is valid' do
+      is_expected.to be_valid
+    end
   end
 
-  it 'is not valid without a first_name' do
-    subject.first_name = ''
-    is_expected.to_not be_valid
-    expect(subject.errors[:first_name].count).to be > 0
-  end
+  %i[first_name last_name].each do |field|
+    context "without #{field}" do
+      let(:user) { build(:user, field => '') }
+      it 'is invalid' do
+        is_expected.to_not be_valid
+      end
 
-  it 'is not valid without a last_name' do
-    subject.last_name = ''
-    is_expected.to_not be_valid
-    expect(subject.errors[:last_name].count).to be > 0
+      it "contains #{field} error messages" do
+        subject.valid?
+        expect(subject.errors[field].count).to be > 0
+      end
+    end
   end
 end
