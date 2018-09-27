@@ -7,16 +7,7 @@ describe BooksController do
         get :index
       end
 
-      it 'responses with 401' do
-        expect(response).to have_http_status(:unauthorized)
-      end
-
-      it 'return a login error message' do
-        error_message = {
-          errors: ['You need to sign in or sign up before continuing.']
-        }.to_json
-        expect(response.body).to eq(error_message)
-      end
+      include_examples 'Unauthorized examples'
     end
 
     context 'with authentication' do
@@ -46,16 +37,7 @@ describe BooksController do
         get :show, params: { id: book.id }
       end
 
-      it 'responses with 401' do
-        expect(response).to have_http_status(:unauthorized)
-      end
-
-      it 'return a login error message' do
-        error_message = {
-          errors: ['You need to sign in or sign up before continuing.']
-        }.to_json
-        expect(response.body).to eq(error_message)
-      end
+      include_examples 'Unauthorized examples'
     end
 
     context 'with authentication' do
