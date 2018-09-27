@@ -71,7 +71,7 @@ describe BooksController do
       end
 
       it 'responses with desired book' do
-        expect(response.body).to be true
+        expect(response.body).to eq(BookSerializer.new(book).to_json)
       end
     end
   end
