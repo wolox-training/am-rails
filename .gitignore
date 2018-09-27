@@ -14,8 +14,6 @@
 !/tmp/.keep
 
 /test
-/tmp
-/log
 
 /node_modules
 /yarn-error.log
