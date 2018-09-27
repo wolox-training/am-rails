@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe BooksController do
+describe Api::V1::BooksController do
   describe 'GET #index' do
     context 'without authentication' do
       before(:each) do
