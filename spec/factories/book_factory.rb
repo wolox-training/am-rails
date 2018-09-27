@@ -7,6 +7,6 @@ FactoryBot.define do
     image { Faker::Internet.url }
     title { Faker::Book.title }
     publisher { Faker::Book.publisher }
-    year { Faker::Date.backward(1000).year }
+    year { Faker::Number.between(1900, 2018) }
   end
 end
