@@ -2,45 +2,30 @@ require 'faker'
 require 'rails_helper'
 
 describe Book do
-  let(:genre) { Faker::Book.genre }
-  let(:author) { Faker::Book.author }
-  let(:image) { Faker::Internet.url }
-  let(:title) { Faker::Book.title }
-  let(:publisher) { Faker::Book.publisher }
-  let(:year) { Faker::Date.backward(1000).year }
+  subject(:book) do
+    book
+  end
 
   context 'with all fields' do
-    subject(:book) do
-      described_class.new(genre: genre,
-                          author: author,
-                          image: image,
-                          title: title,
-                          publisher: publisher,
-                          year: year)
-    end
+    let(:book) { build(:book) }
 
     it 'is valid' do
-      expect(subject.valid?).to eq(true)
+      is_expected.to be_valid
     end
   end
 
-  context 'without all fields' do
-    subject(:book) do
-      described_class.new(genre: genre,
-                          author: author,
-                          image: image,
-                          title: title,
-                          publisher: '',
-                          year: year)
-    end
+  %i[genre author image title publisher year].each do |field|
+    context "without #{field}" do
+      let(:book) { build(:book, field => '') }
 
-    it 'is not valid' do
-      expect(subject.valid?).to eq(false)
-    end
+      it 'is not valid' do
+        is_expected.to_not be_valid
+      end
 
-    it 'contains publisher field error' do
-      subject.valid?
-      expect(subject.errors[:publisher].length).to be > 0
+      it "contains a #{field} field error message" do
+        subject.valid?
+        expect(subject.errors[field].count).to be > 0
+      end
     end
   end
 end
