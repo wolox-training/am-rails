@@ -3,6 +3,6 @@ class BookSerializer < ActiveModel::Serializer
              :created_at, :updated_at
 
   def image
-    { link: object.image }
+    { url: object.image }
   end
 end
