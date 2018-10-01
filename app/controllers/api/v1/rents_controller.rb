@@ -5,8 +5,7 @@ module Api
         @rent = Rent.new(rent_params)
 
         if @rent.save
-          RentMailer.with(rent: @rent).rent_confirmation.deliver_now
-
+          MailWorker.perform_async(@rent.id)
           render json: @rent, status: :created
         else
           render json: { error: @rent.errors.messages }

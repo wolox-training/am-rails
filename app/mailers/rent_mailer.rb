@@ -1,6 +1,7 @@
 class RentMailer < ApplicationMailer
   def rent_confirmation
-    @rent = params[:rent]
+    rent_id = params[:rent]
+    @rent = Rent.find(rent_id)
     @user = @rent.user
     @book = @rent.book
     mail(to: @user.email, subject: 'Rent Confirmation Email')
