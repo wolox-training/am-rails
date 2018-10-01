@@ -5,8 +5,7 @@ Rails.application.routes.draw do
 
     resources :books, only: [:index, :show]
     
-    get 'users/:user_id/rents', to: 'rents#index_user'
-    get 'books/:book_id/rents', to: 'rents#index_book'
+    get 'users/:user_id/rents', to: 'rents#index'
     post 'users/:user_id/rents', to: 'rents#create'
   end
 end
