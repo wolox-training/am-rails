@@ -4,13 +4,22 @@
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
   </head>
   <body>
-    <h1>Rent confirmation for <%= @user.first_name %></h1>
-    <p>
-      You have succesfully rented a book
-    </p>
-    <p>
-      To login to the site, just follow this link: <%= @url %>.
-    </p>
-    <p>Thanks for joining and have a great day!</p>
+    <h1>Rent confirmation for <%= @user.first_name %>.</h1>
+    <h4>
+      You have succesfully rented <%= @book.title %>.
+    </h4>
+
+    <p>Info about <%= @book.title %>: </p>
+    <ul>
+      <li>Author: <%= @book.author %></li>
+      <li>Publisher: <%= @book.publisher %></li>
+      <li>Year: <%= @book.year %></li>
+      <li>Genre: <%= @book.genre %></li>
+    </ul>
+
+    Remember that the rent is from <%= @rent.from_date %> to <%= @rent.to_date %>
+    <hr>
+    Rent confirmation created at: <%= @rent.created_at%>
+
   </body>
 </html>

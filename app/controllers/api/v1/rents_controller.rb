@@ -5,8 +5,7 @@ module Api
         @rent = Rent.new(rent_params)
 
         if @rent.save
-          @user = User.find(params[:user_id])
-          RentMailer.with(user: @user).rent_confirmation.deliver_now
+          RentMailer.with(rent: @rent).rent_confirmation.deliver_now
 
           render json: @rent, status: :created
         else
