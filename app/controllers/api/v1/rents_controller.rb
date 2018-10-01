@@ -3,11 +3,14 @@ module Api
     class RentsController < ApiController
       def create
         @rent = Rent.new(rent_params)
+
         if @rent.save
           render json: @rent, status: :created
         else
           render json: { error: @rent.errors.messages }
         end
+      rescue ActionController::ParameterMissing => e
+        render json: { error: e.to_s }, status: :bad_request
       end
 
       def index

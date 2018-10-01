@@ -3,9 +3,10 @@ Rails.application.routes.draw do
     # devise_for :users  Commented out because devise is not used for login
     mount_devise_token_auth_for 'User', at: 'auth'
 
-    resources :books, only: [:index, :show]
-    
-    get 'users/:user_id/rents', to: 'rents#index'
-    post 'users/:user_id/rents', to: 'rents#create'
+    resources :books, only: %i[index, show]
+
+    resources :users do
+      resources :rents, only: %i[index create]
+    end
   end
 end
