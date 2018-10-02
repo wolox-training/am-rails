@@ -8,7 +8,7 @@ module Api
 
       def index
         @books = Book.all
-        render_paginated json: @books
+        render_paginated @books
       end
     end
   end
