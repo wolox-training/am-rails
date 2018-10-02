@@ -3,7 +3,7 @@ en:
 
   rent_mailer:
     rent_confirmation:
-      title: 'Rent confirmation for %{title}'
+      title: "Rent confirmation for %{title}"
       subtitle: "%{name}, you have succesfully rented %{title}"
       info: 'Additional info about the book'
       author: "Author: %{author}"
