@@ -1,4 +1,6 @@
 class RentMailer < ApplicationMailer
+  layout 'layouts/rent_mailer'
+
   def rent_confirmation
     rent_id = params[:rent_id]
     @rent = Rent.find(rent_id)

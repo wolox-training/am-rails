@@ -1,21 +1,14 @@
-doctype html
+h1 = t('.title' , title: @book.title)
 
-html
-  head
-    meta content='text/html; charset=UTF-8' http-equiv='Content-Type'
-  
-  body
-    h1 = t('.title' , title: @book.title)
+h4 = t('.subtitle', name: @user.first_name, title: @book.title)
 
-    h4 = t('.subtitle', name: @user.first_name, title: @book.title)
+p = t('.info')
+ul
+  li = t('.author', author: @book.author)
+  li = t('.publisher', publisher: @book.publisher)
+  li = t('.year', year: @book.year)
+  li = t('.genre', genre: @book.genre)
 
-    p = t('.info')
-    ul
-      li = t('.author', author: @book.author)
-      li = t('.publisher', publisher: @book.publisher)
-      li = t('.year', year: @book.year)
-      li = t('.genre', genre: @book.genre)
-
-    p = t('.foot1', from: @rent.from_date, to: @rent.to_date)
-    hr
-    p = t('.foot2', created_at: @rent.created_at)
+p = t('.foot1', from: @rent.from_date, to: @rent.to_date)
+hr
+p = t('.foot2', created_at: @rent.created_at)

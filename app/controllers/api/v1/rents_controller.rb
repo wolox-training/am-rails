@@ -3,22 +3,26 @@ module Api
     class RentsController < ApiController
       def create
         @rent = Rent.new(rent_params)
+
         if @rent.save
           RentMailer.with(rent_id: @rent.id).rent_confirmation.deliver_later
           render json: @rent, status: :created
         else
           render json: { error: @rent.errors.messages }
         end
+      rescue ActionController::ParameterMissing => e
+        render json: { error: e.to_s }, status: :bad_request
       end
 
-      def index_user
-        @rents = Rent.where user_id: params[:user_id].to_i
-        render_paginated @rents
-      end
+      def index
+        user_id = params[:user_id].to_i
 
-      def index_book
-        @rents = Rent.where book_id: params[:book_id].to_i
-        render_paginated @rents
+        if user_id != current_api_v1_user.id
+          render json: { error: 'Cant access rents from other user' }, status: :unauthorized
+        else
+          @rents = Rent.where user_id: user_id
+          render_paginated @rents
+        end
       end
 
       private
