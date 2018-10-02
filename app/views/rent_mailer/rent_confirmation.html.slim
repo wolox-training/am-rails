@@ -1,20 +1,13 @@
-doctype html
+h1 Rent confirmation for #{@book.title}.
+h4 #{@user.first_name}, You have succesfully rented #{@book.title}.
 
-html
-  head
-    meta content='text/html; charset=UTF-8' http-equiv='Content-Type'
-  
-  body
-    h1 Rent confirmation for #{@book.title}.
-    h4 #{@user.first_name}, You have succesfully rented #{@book.title}.
+p Info about the book:
+ul
+  li Author: #{@book.author}
+  li Publisher: #{@book.publisher}
+  li Year: #{@book.year}
+  li Genre: #{@book.genre}
 
-    p Info about the book:
-    ul
-      li Author: #{@book.author}
-      li Publisher: #{@book.publisher}
-      li Year: #{@book.year}
-      li Genre: #{@book.genre}
-
-    p Remember that the rent is from #{@rent.from_date} to #{@rent.to_date}
-    hr
-    p Rent confirmation created at: #{@rent.created_at}
+p Remember that the rent is from #{@rent.from_date} to #{@rent.to_date}
+hr
+p Rent confirmation created at: #{@rent.created_at}
