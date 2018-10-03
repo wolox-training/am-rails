@@ -8,7 +8,7 @@ module Api
       before_action :set_locale
 
       def set_locale
-        I18n.default_locale = current_api_v1_user.locale
+        I18n.default_locale = current_api_v1_user.locale || :en
       end
     end
   end
