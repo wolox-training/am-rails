@@ -43,6 +43,7 @@ group :development, :test do
   gem 'faker', '~> 1.9.1'
   gem 'factory_bot_rails', '~> 4.0'
   gem 'rails-controller-testing', '~> 1.0.2'
+  gem 'dotenv-rails', '~> 2.5.0'
 end
 
 group :development do
@@ -63,3 +64,5 @@ gem 'rubocop', '~> 0.59.1'
 gem 'wor-paginate', '~> 0.1.4'
 gem 'versionist', '~> 1.7.0'
 gem 'active_model_serializers', '~> 0.10.0'
+gem 'sidekiq', '~> 5.2.2'
+gem "slim-rails", '~> 3.1.3'
