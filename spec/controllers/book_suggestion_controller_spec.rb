@@ -1,4 +1,4 @@
 require 'rails_helper'
 
-RSpec.describe BookSuggestionController, type: :controller do
+describe Api::V1::BookSuggestionsController do
 end
