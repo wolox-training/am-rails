@@ -56,7 +56,7 @@ describe Api::V1::RentsController do
     context 'with authentication' do
       include_context 'authenticated user'
 
-      # TODO see how to handle the no redis server error
+      # TODO: see how to handle the no redis server error
       xit do
         is_expected.to have_http_status(:created)
       end
