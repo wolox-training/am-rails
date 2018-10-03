@@ -5,8 +5,6 @@ class RentMailer < ApplicationMailer
     @user = @rent.user
     @book = @rent.book
 
-    I18n.locale = @user.locale || I18n.default_locale
-
     mail(to: @user.email, subject: 'Rent Confirmation Email')
   end
 end

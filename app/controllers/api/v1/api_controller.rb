@@ -5,6 +5,11 @@ module Api
 
       protect_from_forgery with: :null_session
       before_action :authenticate_api_v1_user!
+      before_action :set_locale
+
+      def set_locale
+        I18n.default_locale = current_api_v1_user.locale
+      end
     end
   end
 end
