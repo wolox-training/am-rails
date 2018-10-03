@@ -3,6 +3,7 @@ module Api
     class RentsController < ApiController
       def create
         @rent = Rent.new(rent_params)
+        authorize @rent
 
         if @rent.save
           RentMailer.with(rent_id: @rent.id).rent_confirmation.deliver_later
@@ -16,13 +17,9 @@ module Api
 
       def index
         user_id = params[:user_id].to_i
-
-        if user_id != current_api_v1_user.id
-          render json: { error: 'Cant access rents from other user' }, status: :unauthorized
-        else
-          @rents = Rent.where user_id: user_id
-          render_paginated @rents
-        end
+        @rents = Rent.where user_id: user_id
+        authorize @rents
+        render_paginated @rents
       end
 
       private
