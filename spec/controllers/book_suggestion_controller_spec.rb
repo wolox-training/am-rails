@@ -4,7 +4,7 @@ describe Api::V1::BookSuggestionsController do
   describe 'POST #create with authentication' do
     subject(:response) do
       post :create, params: {
-        book_suggestion: attributes_for(:book_suggestion, user_id: user.id)
+        book_suggestion: attributes_for(:book_suggestion, user: user)
       }
     end
 
