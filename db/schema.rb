@@ -42,7 +42,7 @@ ActiveRecord::Schema.define(version: 20181003171306) do
   end
 
   create_table "book_suggestions", force: :cascade do |t|
-    t.string "synopsis", null: false
+    t.string "synopsis"
     t.float "price"
     t.string "author", null: false
     t.string "title", null: false
