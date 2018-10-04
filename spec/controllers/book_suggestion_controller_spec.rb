@@ -1,17 +1,16 @@
 require 'rails_helper'
 
 describe Api::V1::BookSuggestionsController do
-  let(:user) { nil }
-
   describe 'POST #create' do
     subject(:http_response) do
       post :create, params: {
-        book_suggestion: attributes_for(:book_suggestion, user: user)
+        book_suggestion: book_attributes
       }
     end
 
     context('with authentication') do
       include_context 'authenticated user'
+      let(:book_attributes) { attributes_for(:book_suggestion, user: user) }
 
       it 'responses with :created status code' do
         is_expected.to have_http_status(:created)
@@ -23,6 +22,7 @@ describe Api::V1::BookSuggestionsController do
     end
 
     context 'without authentication' do
+      let(:book_attributes) { attributes_for(:book_suggestion) }
       it 'responses with :created status code' do
         is_expected.to have_http_status(:created)
       end
@@ -32,16 +32,12 @@ describe Api::V1::BookSuggestionsController do
       end
     end
 
-    %i[title author link publisher year].each do |field|
-      context "without #{field}" do
-        let(:http_response) do
-          post :create, params: { book_suggestion: attributes_for(:book_suggestion, field => nil) }
-        end
+    context 'without title' do
+      # let(:book_attributes) { attributes_for(:book_suggestion, title: nil) }
 
-        it 'responses with bad request status code' do
-          expect(http_response).to have_http_status(:bad_request)
-        end
-      end
+      # it 'responses with bad request status code' do
+      #   expect(http_response).to have_http_status(:bad_request)
+      # end
     end
   end
 end
