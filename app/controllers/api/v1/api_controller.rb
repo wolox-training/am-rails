@@ -7,6 +7,7 @@ module Api
       protect_from_forgery with: :null_session
       before_action :authenticate_api_v1_user!
       rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
+      rescue_from ActionController::ParameterMissing, with: :missing_parameter
 
       private
 
@@ -20,6 +21,10 @@ module Api
 
       def user_not_authorized
         render json: { error: 'Not authorized' }, status: :unauthorized
+      end
+
+      def missing_parameter(exception)
+        render json: { error: exception.to_s }, status: :bad_request
       end
     end
   end
