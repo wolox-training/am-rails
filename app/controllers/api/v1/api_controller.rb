@@ -3,7 +3,6 @@ module Api
     class ApiController < ApplicationController
       include Wor::Paginate
       include DeviseTokenAuth::Concerns::SetUserByToken
-      include Pundit
 
       protect_from_forgery with: :null_session
       before_action :authenticate_api_v1_user!

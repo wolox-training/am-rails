@@ -21,7 +21,7 @@ describe Api::V1::RentsController do
     end
 
     context 'without authentication' do
-      let!(:user) { create(:user) }
+      let(:user) { create(:user) }
       it do
         is_expected.to have_http_status(:unauthorized)
       end
@@ -33,7 +33,7 @@ describe Api::V1::RentsController do
       get :index, params: { user_id: user2.id }
     end
 
-    let!(:user2) { create(:user) }
+    let(:user2) { create(:user) }
     let!(:rents) { create_list(:rent, 10, user_id: user2.id) }
 
     context 'with authentication' do
