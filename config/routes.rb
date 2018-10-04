@@ -13,5 +13,6 @@ Rails.application.routes.draw do
     end
 
     resources :book_suggestions, only: :create
+    resources :info, only: :show, controller: :open_library
   end
 end
