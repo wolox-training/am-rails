@@ -8,6 +8,5 @@ FactoryBot.define do
     synopsis  { Faker::FamousLastWords.last_words }
     publisher { Faker::Book.publisher }
     year      { Faker::Number.between(1900, 2018) }
-    user      { nil }
   end
 end
