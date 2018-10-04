@@ -11,8 +11,6 @@ module Api
         else
           render json: { error: @rent.errors.messages }
         end
-      rescue ActionController::ParameterMissing => e
-        render json: { error: e.to_s }, status: :bad_request
       end
 
       def index
