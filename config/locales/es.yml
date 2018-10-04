@@ -1,0 +1,14 @@
+es:
+  hello: "Hola Mundo"
+
+  rent_mailer:
+    rent_confirmation:
+      title: "Confirmación de renta para %{title}"
+      subtitle: "%{name}, has rentado satisfactoriamente %{title}"
+      info: 'Información adicional sobre el libro'
+      author: "Autor: %{author}"
+      publisher: "Editor: %{publisher}"
+      year: "Año: %{year}"
+      genre: "Genero: %{genre}"
+      foot1: "Recuerde que su renta es desde %{from} hasta %{to}"
+      foot2: "Confirmación de renta creada el: %{created_at}"
