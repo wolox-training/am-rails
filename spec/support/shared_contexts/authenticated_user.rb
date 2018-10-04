@@ -1,7 +1,7 @@
 shared_context 'authenticated user' do
-  let(:resource) { create(:user) }
+  let(:user) { create(:user) }
 
   before(:each) do
-    request.headers.merge! resource.create_new_auth_token
+    request.headers.merge! user.create_new_auth_token
   end
 end
