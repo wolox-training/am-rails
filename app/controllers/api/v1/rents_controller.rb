@@ -2,22 +2,22 @@ module Api
   module V1
     class RentsController < ApiController
       def create
-        @rent = Rent.new(rent_params)
-        authorize @rent
+        rent = Rent.new(rent_params)
+        authorize rent
 
-        if @rent.save
-          RentMailer.with(rent_id: @rent.id).rent_confirmation.deliver_later
-          render json: @rent, status: :created
+        if rent.save
+          RentMailer.with(rent_id: rent.id).rent_confirmation.deliver_later
+          render json: rent, status: :created
         else
-          render json: { error: @rent.errors.messages }
+          render json: { error: rent.errors.messages }
         end
       end
 
       def index
         user_id = params[:user_id].to_i
-        @rents = Rent.where user_id: user_id
-        authorize @rents
-        render_paginated @rents
+        rents = Rent.where user_id: user_id
+        authorize rents
+        render_paginated rents
       end
 
       private
