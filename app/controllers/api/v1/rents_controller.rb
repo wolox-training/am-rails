@@ -6,9 +6,7 @@ module Api
         authorize rent
 
         if rent.save
-          RentMailer.with(rent_id: rent.id).rent_confirmation.deliver_later unless
-            params[:send_email]
-
+          RentMailer.with(rent_id: rent.id).rent_confirmation.deliver_later
           render json: rent, status: :created
         else
           render json: { error: rent.errors.messages }
