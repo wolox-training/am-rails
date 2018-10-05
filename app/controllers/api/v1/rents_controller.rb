@@ -15,9 +15,8 @@ module Api
 
       def index
         user_id = params[:user_id].to_i
-        rents = Rent.where user_id: user_id
-        authorize rents
-        render_paginated rents
+        authorize user_id, policy_class: UserPolicy
+        render_paginated Rent.where user_id: user_id
       end
 
       private
