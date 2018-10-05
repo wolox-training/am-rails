@@ -19,5 +19,7 @@ module WBooksAPI
     config.active_job.queue_adapter = :sidekiq
 
     I18n.available_locales = [:en, :es]
+
+    config.time_zone = 'Buenos Aires'
   end
 end

@@ -1,0 +1,10 @@
+:schedule:
+  rent_validation:
+    every: '1d'
+    class: RentValidationJob
+
+:queues:
+  - default
+  - mailers
+
+# max_retries: 1

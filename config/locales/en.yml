@@ -12,3 +12,8 @@ en:
       genre: "Genre: %{genre}"
       foot1: "Remember that the rent is from %{from} to %{to}"
       foot2: "Rent confirmation created at: %{created_at}"
+
+    rent_expiry:
+      title: "Your rent for %{title} expires today"
+      body: "This email is intented to remember you that your rent for %{title} expires today"
+      info: "The rent was from %{from} to %{to}"
