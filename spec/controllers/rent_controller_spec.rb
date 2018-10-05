@@ -11,7 +11,7 @@ describe Api::V1::RentsController do
     context 'with authentication' do
       include_context 'authenticated user'
 
-      it do
+      it 'responses with 200 status code' do
         is_expected.to have_http_status(200)
       end
 
@@ -22,7 +22,7 @@ describe Api::V1::RentsController do
 
     context 'without authentication' do
       let(:user) { create(:user) }
-      it do
+      it 'responses with status code' do
         is_expected.to have_http_status(:unauthorized)
       end
     end
@@ -39,7 +39,7 @@ describe Api::V1::RentsController do
     context 'with authentication' do
       include_context 'authenticated user'
 
-      it do
+      it 'responses with unauthorized status code' do
         is_expected.to have_http_status(:unauthorized)
       end
     end
@@ -49,8 +49,7 @@ describe Api::V1::RentsController do
     subject(:http_request) do
       post :create, params: {
         user_id: user.id,
-        rent: attributes_for(:rent, user_id: user.id, book_id: book.id),
-        send_email: false
+        rent: attributes_for(:rent, user_id: user.id, book_id: book.id)
       }
     end
 
@@ -59,7 +58,7 @@ describe Api::V1::RentsController do
     context 'with authentication' do
       include_context 'authenticated user'
 
-      it do
+      it 'responses with created status code' do
         is_expected.to have_http_status(:created)
       end
 
