@@ -19,6 +19,10 @@ describe Api::V1::BookSuggestionsController do
       it 'contains the user id setted' do
         expect(json_to_hash(http_response.body)['user_id']).to_not eq nil
       end
+
+      it 'creates the book suggestion' do
+        expect { http_response }.to change(BookSuggestion, :count).by(1)
+      end
     end
 
     context 'without authentication' do
@@ -30,14 +34,18 @@ describe Api::V1::BookSuggestionsController do
       it 'contains the user_id setted to null' do
         expect(json_to_hash(http_response.body)['user_id']).to eq nil
       end
+
+      it 'creates the book suggestion' do
+        expect { http_response }.to change(BookSuggestion, :count).by(1)
+      end
     end
 
     context 'without title' do
-      # let(:book_attributes) { attributes_for(:book_suggestion, title: nil) }
+      let(:book_attributes) { attributes_for(:book_suggestion, title: nil) }
 
-      # it 'responses with bad request status code' do
-      #   expect(http_response).to have_http_status(:bad_request)
-      # end
+      it 'responses with bad request status code' do
+        expect(http_response).to have_http_status(:bad_request)
+      end
     end
   end
 end
