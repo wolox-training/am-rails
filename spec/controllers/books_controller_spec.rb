@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe Api::V1::BooksController do
   describe 'GET #index' do
-    subject(:http_response) do
+    subject(:http_request) do
       get :index
     end
 
@@ -16,7 +16,7 @@ describe Api::V1::BooksController do
       end
 
       it 'responses with all books' do
-        expect(decompose_paginated_json(http_response.body).size).to eq(books.size)
+        expect(decompose_paginated_json(http_request.body).size).to eq(books.size)
       end
     end
 
@@ -26,7 +26,7 @@ describe Api::V1::BooksController do
   end
 
   describe 'GET #show' do
-    subject(:http_response) do
+    subject(:http_request) do
       get :show, params: { id: book.id }
     end
 
@@ -40,7 +40,7 @@ describe Api::V1::BooksController do
       end
 
       it 'responses with desired book' do
-        expect(http_response.body).to eq(BookSerializer.new(book).to_json)
+        expect(http_request.body).to eq(BookSerializer.new(book).to_json)
       end
     end
 
