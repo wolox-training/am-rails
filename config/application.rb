@@ -17,5 +17,7 @@ module WBooksAPI
 
     # run bundle exec sidekiq -q default -q mailers
     config.active_job.queue_adapter = :sidekiq
+
+    I18n.available_locales = [:en, :es]
   end
 end
