@@ -25,4 +25,35 @@ describe Rent do
       end
     end
   end
+
+  context 'with start date after end date' do
+    let(:rent) { build(:rent, from_date: Time.zone.today + 2.days, to_date: Time.zone.today) }
+
+    it 'is invalid' do
+      is_expected.to_not be_valid
+    end
+  end
+
+  context 'overlapping' do
+    let(:book) { create(:book) }
+    let(:from) { Time.zone.today }
+    let(:to)   { Time.zone.today + 10.days }
+    let!(:previous_rent) { create(:rent, book: book, from_date: from, to_date: to) }
+
+    context 'startin the same day' do
+      let(:rent) { build(:rent, book: book, from_date: from) }
+
+      it 'contains from_date errors' do
+        is_expected.to_not be_valid
+      end
+    end
+
+    context 'starting in the middle of a rent' do
+      let(:rent) { build(:rent, book: book, from_date: from + 5.days) }
+
+      it 'contains from_date errors' do
+        is_expected.to_not be_valid
+      end
+    end
+  end
 end
