@@ -13,7 +13,7 @@ module Api
       private
 
       def set_locale
-        I18n.default_locale = current_api_v1_user.locale || :en
+        I18n.default_locale = current_api_v1_user.locale unless current_api_v1_user.nil?
       end
 
       def pundit_user
