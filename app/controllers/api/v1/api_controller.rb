@@ -6,6 +6,7 @@ module Api
 
       protect_from_forgery with: :null_session
       before_action :authenticate_api_v1_user!
+      before_action :set_locale
       rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
       rescue_from ActionController::ParameterMissing, with: :missing_parameter
 

@@ -9,6 +9,7 @@ class RentMailer < ApplicationMailer
   def rent_expiry
     @user = rent.user
     @book = rent.book
+    I18n.locale = @user.locale
 
     mail(to: @user.email, subject: t('.title', title: @book.title))
   end
