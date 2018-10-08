@@ -10,6 +10,7 @@ class RentDatesValidator < ActiveModel::Validator
     record.from_date < record.to_date
   end
 
+  # TODO: Remove this when shoulda-matchers is implemented
   def should_skip(record)
     !record.from_date || !record.to_date
   end
