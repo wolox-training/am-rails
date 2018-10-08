@@ -1,15 +1,9 @@
 class OpenLibraryService
   include HTTParty
-  base_uri ENV['API_BOOK_URL']
+  base_uri Rails.application.secrets.API_BOOK_URL
 
   FORMAT = 'json'.freeze
   JSCMD = 'data'.freeze
-
-  # Keys
-  TITLE = 'title'.freeze
-  SUBTITLE = 'subtitle'.freeze
-  N_PAGES = 'number_of_pages'.freeze
-  AUTHORS = 'authors'.freeze
 
   def initialize(isbn)
     @isbn = isbn
@@ -33,18 +27,16 @@ class OpenLibraryService
     response = self.class.get('', @options)
     raise "No book found with code #{@isbn}" if response.body == '{}'
 
-    response
+    response[@isbn]
   end
 
   def format_response(response)
-    response = response[@isbn]
-
     {
       ISBN: @isbn,
-      title: response[TITLE],
-      subtitle: response[SUBTITLE],
-      number_of_pages: response[N_PAGES],
-      authors: response[AUTHORS].map { |data| data['name'] }
+      title: response['title'],
+      subtitle: response['subtitle'],
+      number_of_pages: response['number_of_pages'],
+      authors: response['authors'].map { |data| data['name'] }
     }
   end
 end

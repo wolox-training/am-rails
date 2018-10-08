@@ -7,7 +7,9 @@ Rails.application.routes.draw do
     mount_devise_token_auth_for 'User', at: 'auth'
 
     resources :books, only: %i[index show] do
-      get 'info', on: :collection
+      collection do
+        get 'info'
+      end
     end
 
     resources :users do
