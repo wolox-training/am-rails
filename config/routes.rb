@@ -6,13 +6,14 @@ Rails.application.routes.draw do
     # devise_for :users  Commented out because devise is not used for login
     mount_devise_token_auth_for 'User', at: 'auth'
 
-    resources :books, only: %i[index show]
+    resources :books, only: %i[index show] do
+      get 'info', on: :collection
+    end
 
     resources :users do
       resources :rents, only: %i[index create]
     end
 
     resources :book_suggestions, only: :create
-    resources :info, only: :show, controller: :open_library
   end
 end
