@@ -1,4 +1,6 @@
-class RentValidationJob < ApplicationJob
+class RentValidationWorker
+  include Sidekiq::Worker
+
   def perform
     rents = Rent.where to_date: Time.zone.today
     rents.find_each do |rent|

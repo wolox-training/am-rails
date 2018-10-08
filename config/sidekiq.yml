@@ -1,7 +1,7 @@
 :schedule:
   rent_validation:
-    cron: '0 9 * * *'
-    class: RentValidationJob
+    cron: '0 0 9 * * * America/Santiago'
+    class: RentValidationWorker
 
 :queues:
   - default
