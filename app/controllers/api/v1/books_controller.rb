@@ -7,8 +7,7 @@ module Api
       end
 
       def index
-        books = Book.all
-        render_paginated books
+        render_paginated Book
       end
 
       def info
