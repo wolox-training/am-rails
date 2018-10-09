@@ -34,7 +34,7 @@ describe Api::V1::RentsController do
     end
 
     let(:user2) { create(:user) }
-    let!(:rents) { create_list(:rent, 2, user_id: user2.id) }
+    let!(:rents) { create_list(:rent, 10, user_id: user2.id) }
 
     context 'with authentication' do
       include_context 'authenticated user'
