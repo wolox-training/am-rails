@@ -17,3 +17,10 @@ en:
       title: "Your rent for %{title} expires today"
       body: "This email is intented to remember you that your rent for %{title} expires today"
       info: "The rent was from %{from} to %{to}"
+
+  api:
+    v1:
+      books:
+        info:
+          no_book_error: "No book found with code %{code}"
+          no_isbn: "Please provide an ISBN code"

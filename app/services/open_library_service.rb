@@ -1,31 +1,42 @@
-require 'json'
-
 class OpenLibraryService
   include HTTParty
-  base_uri 'openlibrary.org/api/books'
+  base_uri Rails.application.secrets.API_BOOK_URL
 
-  def book_info(isbn)
-    isbn_code = "ISBN#{isbn}"
-    response = self.class.get('', options(isbn_code))[isbn_code]
+  FORMAT = 'json'.freeze
+  JSCMD = 'data'.freeze
 
-    {
-      ISBN: isbn,
-      title: response['title'],
-      subtitle: response['subtitle'],
-      number_of_pages: response['number_of_pages'],
-      authors: response['authors'].map { |data| data['name'] }
+  def initialize(isbn)
+    @isbn = isbn
+    @options = {
+      query: {
+        bibkeys: @isbn,
+        format: FORMAT,
+        jscmd: JSCMD
+      }
     }
+  end
+
+  def book_info
+    response = retrieve_from_api
+    return {} if response.nil?
+
+    format_response response
   end
 
   private
 
-  def options(isbn)
+  def retrieve_from_api
+    response = self.class.get('', @options)
+    response[@isbn]
+  end
+
+  def format_response(response)
     {
-      query: {
-        bibkeys: isbn,
-        format: 'json',
-        jscmd: 'data'
-      }
+      ISBN: @isbn,
+      title: response['title'],
+      subtitle: response['subtitle'],
+      number_of_pages: response['number_of_pages'],
+      authors: response['authors'].map { |data| data['name'] }
     }
   end
 end
