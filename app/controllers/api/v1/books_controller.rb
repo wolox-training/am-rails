@@ -13,15 +13,12 @@ module Api
 
       def info
         isbn = params[:isbn]
-        return render json: { error: 'Please provide an ISBN code' } if isbn.nil?
+        return render json: { error: t('.no_isbn') } if isbn.nil?
 
-        book = OpenLibraryService.new(isbn).book_info
+        book_info = OpenLibraryService.new(isbn).book_info
+        return render json: { error: t('.no_book_error', code: isbn) } if book_info.empty?
 
-        if book == {}
-          render json: { error: "No book found with code #{isbn}" }
-        else
-          render json: book
-        end
+        render json: book_info
       end
     end
   end

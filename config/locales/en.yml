@@ -12,3 +12,10 @@ en:
       genre: "Genre: %{genre}"
       foot1: "Remember that the rent is from %{from} to %{to}"
       foot2: "Rent confirmation created at: %{created_at}"
+
+  api:
+    v1:
+      books:
+        info:
+          no_book_error: "No book found with code %{code}"
+          no_isbn: "Please provide an ISBN code"
