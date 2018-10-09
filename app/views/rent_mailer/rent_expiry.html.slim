@@ -1,0 +1,8 @@
+h1
+  = t('.title' , title: @book.title)
+
+p
+  = t('.body', title: @book.title)
+
+p
+  = t('.info', from: @rent.from_date, to: @rent.to_date)

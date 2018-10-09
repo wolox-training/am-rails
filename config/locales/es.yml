@@ -13,9 +13,15 @@ es:
       foot1: "Recuerde que su renta es desde %{from} hasta %{to}"
       foot2: "Confirmación de renta creada el: %{created_at}"
 
-  api:
+    rent_expiry:
+      title: "Tu renta de  %{title} vence hoy!"
+      body: "Este correo es para recordarte que tu renta %{title} vence hoy"
+      info: "La renta fue de %{from} hasta %{to}"
+
+api:
     v1:
       books:
         info:
           no_book_error: "No se encontró ningún libro con el codigo: %{code}"
           no_isbn: "Por favor indique un código ISBN válido"
+

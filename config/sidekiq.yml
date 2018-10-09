@@ -1,0 +1,10 @@
+:schedule:
+  rent_validation:
+    cron: '0 0 9 * * * America/Santiago'
+    class: RentValidationWorker
+
+:queues:
+  - default
+  - mailers
+
+# max_retries: 1
