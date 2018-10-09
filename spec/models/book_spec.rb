@@ -1,4 +1,3 @@
-require 'faker'
 require 'rails_helper'
 
 describe Book do
