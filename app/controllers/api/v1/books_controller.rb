@@ -16,9 +16,12 @@ module Api
         return render json: { error: 'Please provide an ISBN code' } if isbn.nil?
 
         book = OpenLibraryService.new(isbn).book_info
-        render json: book
-      rescue RuntimeError => e
-        render json: { error: e.to_s }
+
+        if book == {}
+          render json: { error: "No book found with code #{isbn}" }
+        else
+          render json: book
+        end
       end
     end
   end

@@ -18,6 +18,8 @@ class OpenLibraryService
 
   def book_info
     response = retrieve_from_api
+    return {} if response.nil?
+
     format_response response
   end
 
@@ -25,8 +27,6 @@ class OpenLibraryService
 
   def retrieve_from_api
     response = self.class.get('', @options)
-    raise "No book found with code #{@isbn}" if response.body == '{}'
-
     response[@isbn]
   end
 

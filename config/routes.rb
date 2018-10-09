@@ -8,7 +8,7 @@ Rails.application.routes.draw do
 
     resources :books, only: %i[index show] do
       collection do
-        get 'info'
+        get :info
       end
     end
 
