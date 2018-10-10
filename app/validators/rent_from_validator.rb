@@ -6,7 +6,7 @@ class RentFromValidator < ActiveModel::Validator
 
   def from_date_available?(record)
     rents = Rent.where book_id: record.book_id
-    rents = rents.where('from_date < ?', record.from_date)
+    rents = rents.where('from_date <= ?', record.from_date)
     rents = rents.where(to_date: (record.from_date..record.to_date))
 
     rents.empty?
