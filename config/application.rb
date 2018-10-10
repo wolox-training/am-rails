@@ -15,6 +15,9 @@ module WBooksAPI
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
 
+    # run bundle exec sidekiq -q default -q mailers
+    config.active_job.queue_adapter = :sidekiq
+
     I18n.available_locales = [:en, :es]
 
     config.time_zone = 'Buenos Aires'
