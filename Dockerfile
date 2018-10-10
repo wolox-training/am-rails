@@ -1,4 +1,5 @@
 FROM ruby:2.5
+LABEL maintainer="Alejandro Ochoa <alejandro.ochoa@wolox.com>"
 
 RUN apt-get update -qq && apt-get install -y build-essential libpq-dev nodejs
 
