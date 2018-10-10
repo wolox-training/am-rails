@@ -1,33 +1,21 @@
 require 'rails_helper'
 
 describe Rent do
-  subject(:rent) do
-    rent
-  end
+  subject(:rent) { build(:rent, params) }
+  let(:params) {}
 
-  context 'with all fields' do
-    let(:rent) { build(:rent) }
-    it 'is valid' do
-      is_expected.to be_valid
-    end
-  end
+  it { is_expected.to be_valid }
 
-  %i[book_id user_id from_date to_date].each do |field|
-    context "without #{field}" do
-      let(:rent) { build(:rent, field => '') }
-      it 'is invalid' do
-        is_expected.to_not be_valid
-      end
+  it { is_expected.to validate_presence_of(:book_id) }
+  it { is_expected.to validate_presence_of(:user_id) }
+  it { is_expected.to validate_presence_of(:from_date) }
+  it { is_expected.to validate_presence_of(:to_date) }
 
-      it "contains #{field} error messages" do
-        rent.valid?
-        expect(rent.errors[field].count).to_not be 0
-      end
-    end
-  end
+  it { is_expected.to belong_to(:user) }
+  it { is_expected.to belong_to(:book) }
 
   context 'with start date after end date' do
-    let(:rent) { build(:rent, from_date: Time.zone.today + 2.days, to_date: Time.zone.today) }
+    let(:params) { { from_date: Time.zone.today + 2.days, to_date: Time.zone.today } }
 
     it 'is invalid' do
       is_expected.to_not be_valid
@@ -41,7 +29,7 @@ describe Rent do
     let!(:previous_rent) { create(:rent, book: book, from_date: from, to_date: to) }
 
     context 'startin the same day' do
-      let(:rent) { build(:rent, book: book, from_date: from) }
+      let(:params) { { book: book, from_date: from } }
 
       it 'is not valid' do
         is_expected.to_not be_valid
@@ -54,7 +42,7 @@ describe Rent do
     end
 
     context 'starting in the middle of a rent' do
-      let(:rent) { build(:rent, book: book, from_date: from + 5.days, to_date: to + 5.days) }
+      let(:params) { { book: book, from_date: from + 5.days, to_date: to + 5.days } }
 
       it 'is not valid' do
         is_expected.to_not be_valid
@@ -67,7 +55,7 @@ describe Rent do
     end
 
     context 'finishing in the middle of a rent' do
-      let(:rent) { build(:rent, book: book, from_date: from - 5.days, to_date: to - 5.days) }
+      let(:params) { { book: book, from_date: from - 5.days, to_date: to - 5.days } }
 
       it 'is not valid' do
         is_expected.to_not be_valid
