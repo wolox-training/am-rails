@@ -1,9 +1,14 @@
 require 'rails_helper'
 
 describe User do
-  %i[first_name last_name].each do |field|
-    it "validates presence of #{field}" do
-      should validate_presence_of(field)
-    end
-  end
+  subject(:user) { build(:user) }
+
+  it { is_expected.to be_valid }
+
+  it { is_expected.to validate_presence_of(:first_name) }
+  it { is_expected.to validate_presence_of(:last_name) }
+
+  it { is_expected.to have_many(:rents) }
+  it { is_expected.to have_many(:books) }
+  it { is_expected.to have_many(:book_suggestions) }
 end

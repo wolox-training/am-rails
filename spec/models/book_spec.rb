@@ -1,9 +1,17 @@
 require 'rails_helper'
 
 describe Book do
-  %i[title genre author image publisher year].each do |field|
-    it "validates presence of #{field}" do
-      should validate_presence_of(field)
-    end
-  end
+  subject(:book) { build(:book) }
+
+  it { is_expected.to be_valid }
+
+  it { is_expected.to validate_presence_of(:genre) }
+  it { is_expected.to validate_presence_of(:author) }
+  it { is_expected.to validate_presence_of(:image) }
+  it { is_expected.to validate_presence_of(:title) }
+  it { is_expected.to validate_presence_of(:publisher) }
+  it { is_expected.to validate_presence_of(:year) }
+
+  it { is_expected.to have_many(:rents) }
+  it { is_expected.to have_many(:users) }
 end

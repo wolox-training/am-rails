@@ -1,9 +1,13 @@
 require 'rails_helper'
 
 describe BookSuggestion do
-  %i[author title link publisher year].each do |field|
-    it "it validates presence of #{field}" do
-      should validate_presence_of field
-    end
-  end
+  subject(:book_suggestion) { build(:book_suggestion) }
+
+  it { is_expected.to be_valid }
+
+  it { is_expected.to validate_presence_of(:author) }
+  it { is_expected.to validate_presence_of(:title) }
+  it { is_expected.to validate_presence_of(:link) }
+  it { is_expected.to validate_presence_of(:publisher) }
+  it { is_expected.to validate_presence_of(:year) }
 end
